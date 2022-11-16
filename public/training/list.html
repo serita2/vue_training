@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <ul id="array-rendering">
+        <li v-for="(item, index) in items">
+            {{ parentMessage }} - {{ index }} - {{ item.message }}
+          </li>
+    </ul>
+    <ul id="v-for-object" class="demo">
+        <li v-for="value in myObject">
+          {{ value }}
+        </li>
+
+        <li v-for="(value, name) in myObject">
+            {{ name }}: {{ value }}
+        </li>
+    </ul>
+    <ul id="v-number">
+        <li v-for="n in evenNumbers" :key="n">{{ n }}</li>
+    </ul>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    parentMessage: 'Parent',
+                    items: [{ message: 'Foo' }, { message: 'Bar' }]
+                }
+            }
+        }).mount('#array-rendering')
+
+        Vue.createApp({
+            data() {
+                return {
+                    myObject: {
+                        title: 'How to do lists in Vue',
+                        author: 'Jane Doe',
+                        publishedAt: '2016-04-10'
+                    }
+                }
+            }
+        }).mount('#v-for-object')
+
+        Vue.createApp({
+            data() {
+                return {
+                    numbers: [ 1, 2, 3, 4, 5 ]
+                }
+            },
+            computed: {
+                evenNumbers() {
+                    return this.numbers.filter(number => number % 2 === 0)
+                }
+            }
+        }).mount('#v-number')
+    </script>
+</body>
+</html>
