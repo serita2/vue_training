@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="computed-basics">
+        <p>Has published books:</p>
+        <span>{{ publishedBooksMessage }}</span>
+    </div>
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+        data() {
+            return { count: 4 }
+        }
+        })
+
+        const vm = app.mount('#app')
+
+        console.log(vm.$data.count) // => 4
+        console.log(vm.count)       // => 4
+
+        // vm.count に値を代入すると、 $data.count も更新
+        vm.count = 5
+        console.log(vm.$data.count) // => 5
+
+        // ... 逆もまた同様
+        vm.$data.count = 6
+        console.log(vm.count) // => 6 
+        
+        Vue.createApp({
+            data() {
+                return {
+                    author: {
+                        name: 'John Doe',
+                        books: [
+                        'Vue 2 - Advanced Guide',
+                        'Vue 3 - Basic Guide',
+                        'Vue 4 - The Mystery'
+                        ]
+                    }
+                }
+            },
+            computed: {
+                // 算出 getter 関数
+                publishedBooksMessage() {
+                // `this` は vm インスタンスを指す
+                return this.author.books.length > 0 ? 'Yes' : 'No'
+                }
+            }
+        }).mount('#computed-basics')
+    </script>
+</body>
+</html>
