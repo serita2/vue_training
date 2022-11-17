@@ -8,6 +8,18 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    
+    <div id="inline-handler">
+        <button @click="say('hi')">Say hi</button>
+        <button @click="say('what')">Say what</button>
+    </div>
+    <script>
+        Vue.createApp({
+            methods: {
+                say(message) {
+                    alert(message)
+                }
+            }
+        }).mount('#inline-handler')
+    </script>
 </body>
 </html>
