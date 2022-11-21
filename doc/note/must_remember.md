@@ -5,3 +5,4 @@
 ### 覚えたい
  - axios
  - Vue Router Vuex
+ - vue-class-component
